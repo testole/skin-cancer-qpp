@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Condition Diagnosis Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .active {
+            display: block;
+        }
+        label {
+            margin-left: 8px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Skin Condition Diagnosis Quiz</h1>
+    <form id="quizForm" method="post" action="/finalize">
+        <div class="question active" data-question="1">
+            <p>1. Where is the affected area located?</p>
+            <div><input type="radio" name="areaPosition" value="head"><label>Head</label></div>
+            <div><input type="radio" name="areaPosition" value="chest"><label>Chest</label></div>
+            <div><input type="radio" name="areaPosition" value="upperLimb"><label>Upper Limb</label></div>
+            <div><input type="radio" name="areaPosition" value="abdominalArea"><label>Abdominal Area</label></div>
+            <div><input type="radio" name="areaPosition" value="lowerLimb"><label>Lower Limb</label></div>
+        </div>
+        <div class="question" data-question="2">
+            <p>2. How would you describe the size of the affected area?</p>
+            <div><input type="radio" name="areaSize" value="singleLesion"><label>Single Lesion</label></div>
+            <div><input type="radio" name="areaSize" value="limitedArea"><label>Limited Area</label></div>
+            <div><input type="radio" name="areaSize" value="widespread"><label>Widespread</label></div>
+        </div>
+        <div class="question" data-question="3">
+            <p>3. How long has the injury been present?</p>
+            <div><input type="radio" name="duration" value="minutesToHours"><label>Minutes to Hours</label></div>
+            <div><input type="radio" name="duration" value="daysToWeeks"><label>Days to Weeks</label></div>
+            <div><input type="radio" name="duration" value="weeksToMonths"><label>Weeks to Months</label></div>
+            <div><input type="radio" name="duration" value="monthsToYears"><label>Months to Years</label></div>
+            <div><input type="radio" name="duration" value="recurring"><label>Recurring Episodes</label></div>
+        </div>
+        <div class="question" data-question="4">
+            <p>4. Is there any itch associated with the affected area?</p>
+            <div><input type="radio" name="itch" value="yes"><label>Yes</label></div>
+            <div><input type="radio" name="itch" value="no"><label>No</label></div>
+        </div>
+        <div class="question" data-question="5">
+            <p>5. Is there any fever associated with the condition?</p>
+            <div><input type="radio" name="fever" value="yes"><label>Yes</label></div>
+            <div><input type="radio" name="fever" value="no"><label>No</label></div>
+        </div>
+        <div class="question" data-question="6">
+            <p>6. What is the shape of the affected area?</p>
+            <div><input type="radio" name="areaShape" value="raisedBumpy"><label>Raised or Bumpy</label></div>
+            <div><input type="radio" name="areaShape" value="flat"><label>Flat</label></div>
+            <div><input type="radio" name="areaShape" value="sunken"><label>Skin loss or Sunken</label></div>
+        </div>
+        <div class="question" data-question="7">
+            <p>7. What is the color of the affected area?</p>
+            <div><input type="radio" name="skinColor" value="patch"><label>Patch or Macule</label></div>
+            <div><input type="radio" name="skinColor" value="broadArea"><label>Broad area of color</label></div>
+        </div>
+        <div class="question" data-question="8">
+            <p>8. What kind of tissue damage is evident?</p>
+            <div><input type="radio" name="tissueDamage" value="thinning"><label>Thinning or Atrophy</label></div>
+            <div><input type="radio" name="tissueDamage" value="fissures"><label>Fissures or Cracking</label></div>
+            <div><input type="radio" name="tissueDamage" value="scarring"><label>Scarring</label></div>
+            <div><input type="radio" name="tissueDamage" value="ulcers"><label>Ulcers or Erosion</label></div>
+        </div>
+    </form>
+
+    <script>
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', function() {
+                let current = document.querySelector('.question.active');
+                current.classList.remove('active');
+                const nextQuestion = current.nextElementSibling;
+                if (nextQuestion) {
+                    nextQuestion.classList.add('active');
+                } else {
+                    document.getElementById('quizForm').submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
